@@ -11,6 +11,6 @@ class Image extends Model
 
     public function room(): BelongsTo
     {
-        return $this->belongsTo(room::class);
+        return $this->belongsTo(Room::class);
     }
 }

@@ -34,11 +34,11 @@ class Room extends Model
     ];
     public function images(): HasMany
     {
-        return $this->hasMany(image::class);
+        return $this->hasMany(Image::class);
     }
 
     public function amenities(): BelongsToMany
     {
-        return $this->belongsToMany(amenity::class, 'room_amenities');
+        return $this->belongsToMany(Amenity::class, 'room_amenities');
     }
 }

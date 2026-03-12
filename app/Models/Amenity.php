@@ -12,11 +12,11 @@ class Amenity extends Model
     protected $hidden = ['pivot'];
     public function image(): BelongsTo
     {
-        return $this->belongsTo(image::class);
+        return $this->belongsTo(Image::class);
     }
 
     public function rooms(): BelongsToMany
     {
-        return $this->belongsToMany(room::class, 'room_amenities');
+        return $this->belongsToMany(Room::class, 'room_amenities');
     }
 }
