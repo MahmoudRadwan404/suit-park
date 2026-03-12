@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Amenity;
-use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
