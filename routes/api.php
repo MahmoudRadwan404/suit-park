@@ -18,6 +18,7 @@ Route::prefix('rooms')->group(function () {
 
 });
 
+
 // Amenities
 Route::prefix('amenities')->group(function () {
     Route::get('/', [AmenityController::class, 'index']);
