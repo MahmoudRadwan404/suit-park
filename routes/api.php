@@ -4,6 +4,7 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\AmenityController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
 
 // Rooms
 Route::prefix('rooms')->group(function () {
@@ -35,4 +36,14 @@ Route::prefix('images')->group(function () {
     Route::get('/{id}', [ImageController::class, 'show']);
     Route::post('/{id}', [ImageController::class, 'update']);
     Route::delete('/{id}', [ImageController::class, 'destroy']);
+});
+
+
+
+
+Route::prefix('contacts')->group(function () {
+    Route::get('/', [ContactController::class, 'index']);
+    Route::post('/', [ContactController::class, 'store']);
+    Route::get('/{id}', [ContactController::class, 'show']);
+    Route::delete('/{id}', [ContactController::class, 'destroy']);
 });
