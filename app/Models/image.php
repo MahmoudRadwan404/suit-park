@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class image extends Model
+class Image extends Model
 {
     protected $fillable = ['name', 'path', 'type', 'room_id'];
 

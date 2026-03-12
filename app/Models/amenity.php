@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class amenity extends Model
+class Amenity extends Model
 {
     protected $fillable = ['name_ar', 'name_en', 'image_id', 'number', 'value'];
     protected $hidden = ['pivot'];
