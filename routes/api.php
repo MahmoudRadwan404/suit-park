@@ -67,3 +67,11 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/{id}', [UserController::class, 'deleteUser']);
     Route::post('/update/{id}', [UserController::class, 'updateUser']);
 });
+
+Route::get('/health', function () {
+    return response()->json([
+        'status' => 'OK',
+        'message' => 'Your API is running',
+        'timestamp' => now()->toISOString()
+    ]);
+});
