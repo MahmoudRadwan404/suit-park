@@ -3,47 +3,67 @@
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\AmenityController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 
 // Rooms
 Route::prefix('rooms')->group(function () {
     Route::get('/', [RoomController::class, 'index']);
-    Route::post('/', [RoomController::class, 'store']);
     Route::get('/{id}', [RoomController::class, 'show']);
-    Route::post('/{id}', [RoomController::class, 'update']);
-    Route::delete('/{id}', [RoomController::class, 'destroy']);
-    Route::post('/{id}/amenities/attach', [RoomController::class, 'attachAmenities']);
-    Route::delete('/{id}/amenities/detach', [RoomController::class, 'detachAmenities']);
     Route::get('/filter/type', [RoomController::class, 'filterByType']);
 
+    Route::middleware('auth:api')->group(function () {
+        Route::post('/', [RoomController::class, 'store']);
+        Route::post('/{id}', [RoomController::class, 'update']);
+        Route::delete('/{id}', [RoomController::class, 'destroy']);
+        Route::post('/{id}/amenities/attach', [RoomController::class, 'attachAmenities']);
+        Route::delete('/{id}/amenities/detach', [RoomController::class, 'detachAmenities']);
+    });
 });
 
 
 // Amenities
 Route::prefix('amenities')->group(function () {
     Route::get('/', [AmenityController::class, 'index']);
-    Route::post('/', [AmenityController::class, 'store']);
     Route::get('/{id}', [AmenityController::class, 'show']);
-    Route::post('/{id}', [AmenityController::class, 'update']);
-    Route::delete('/{id}', [AmenityController::class, 'destroy']);
+
+    Route::middleware('auth:api')->group(function () {
+        Route::post('/', [AmenityController::class, 'store']);
+        Route::post('/{id}', [AmenityController::class, 'update']);
+        Route::delete('/{id}', [AmenityController::class, 'destroy']);
+    });
 });
 
 // Images
 Route::prefix('images')->group(function () {
     Route::get('/', [ImageController::class, 'index']);
-    Route::post('/', [ImageController::class, 'store']);
     Route::get('/{id}', [ImageController::class, 'show']);
-    Route::post('/{id}', [ImageController::class, 'update']);
-    Route::delete('/{id}', [ImageController::class, 'destroy']);
+
+    Route::middleware('auth:api')->group(function () {
+        Route::post('/', [ImageController::class, 'store']);
+        Route::post('/{id}', [ImageController::class, 'update']);
+        Route::delete('/{id}', [ImageController::class, 'destroy']);
+    });
 });
 
-
-
-
+// Contacts
 Route::prefix('contacts')->group(function () {
     Route::get('/', [ContactController::class, 'index']);
-    Route::post('/', [ContactController::class, 'store']);
     Route::get('/{id}', [ContactController::class, 'show']);
-    Route::delete('/{id}', [ContactController::class, 'destroy']);
+
+    Route::middleware('auth:api')->group(function () {
+        Route::post('/', [ContactController::class, 'store']);
+        Route::delete('/{id}', [ContactController::class, 'destroy']);
+    });
+});
+
+// Auth
+Route::post('/login', [UserController::class, 'login']);
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('/register', [UserController::class, 'register']);
+    Route::post('/logout', [UserController::class, 'logout']);
+    Route::delete('/{id}', [UserController::class, 'deleteUser']);
+    Route::post('/update/{id}', [UserController::class, 'updateUser']);
 });
