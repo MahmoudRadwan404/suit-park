@@ -1,5 +1,5 @@
 <?php
-
+use App\Models\Room;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\AmenityController;
@@ -68,10 +68,12 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/update/{id}', [UserController::class, 'updateUser']);
 });
 
-Route::get('/health', function () {
+Route::get('/api/health', function () {
+    $room = Room::paginate(1);
     return response()->json([
         'status' => 'OK',
         'message' => 'Your API is running',
-        'timestamp' => now()->toISOString()
+        'timestamp' => now()->toISOString(),
+        "result" => $room
     ]);
 });
