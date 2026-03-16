@@ -28,8 +28,7 @@ class AmenityController extends Controller
                 'name_ar' => 'required|string|max:100',
                 'name_en' => 'required|string|max:100',
                 'image_id' => 'nullable|exists:images,id',
-                'number' => 'required|integer',
-                'value' => 'required|string',
+
             ]);
 
             $amenity = Amenity::create($validated);

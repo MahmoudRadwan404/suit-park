@@ -15,8 +15,7 @@ return new class extends Migration {
             $table->string('name_ar', 100);
             $table->string('name_en', 100);
             $table->foreignId('image_id')->nullable();
-            $table->integer('number');
-            $table->string('value');
+
             $table->timestamps();
         });
     }
