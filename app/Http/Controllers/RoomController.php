@@ -14,7 +14,7 @@ class RoomController extends Controller
     public function index(Request $request): JsonResponse
     {
         try {
-            $pagenation = $request->input('pagination') || 5;
+            $pagenation = $request->input('pagination') ?? 5;
             $rooms = Room::with(['thumbnails', 'amenities'])->paginate($pagenation);
 
             $rooms->getCollection()->transform(function ($room) {

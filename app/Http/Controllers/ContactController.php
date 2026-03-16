@@ -14,7 +14,7 @@ class ContactController extends Controller
     public function index(Request $request): JsonResponse
     {
         try {
-            $pagenation = $request->input('pagination') || 5;
+            $pagenation = $request->input('pagination') ?? 5;
 
             $contacts = Contact::paginate($pagenation);
             return response()->json($contacts);

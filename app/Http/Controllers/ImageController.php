@@ -15,7 +15,7 @@ class ImageController extends Controller
     public function index(Request $request): JsonResponse
     {
         try {
-            $pagenation = $request->input('pagination') || 5;
+            $pagenation = $request->input('pagination') ?? 5;
 
             $images = Image::paginate($pagenation);
             return response()->json($images);
