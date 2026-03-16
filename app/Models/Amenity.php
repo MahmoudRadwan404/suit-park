@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Amenity extends Model
 {
     protected $fillable = ['name_ar', 'name_en', 'image_id', 'number', 'value'];
-    protected $hidden = ['pivot'];
     public function image(): BelongsTo
     {
         return $this->belongsTo(Image::class);
