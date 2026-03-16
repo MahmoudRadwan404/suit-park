@@ -16,10 +16,6 @@ class RoomController extends Controller
         try {
             $rooms = Room::with(['images', 'amenitiesWithoutPivot'])->paginate(5);
 
-            $rooms->getCollection()->transform(function ($room) {
-                $room->amenities->each(fn($amenity) => $amenity->makeHidden('details'));
-                return $room;
-            });
 
             return response()->json($rooms);
         } catch (Throwable $e) {
