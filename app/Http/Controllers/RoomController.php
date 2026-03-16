@@ -15,6 +15,12 @@ class RoomController extends Controller
     {
         try {
             $rooms = Room::with(['images', 'amenities'])->paginate(5);
+
+            $rooms->getCollection()->transform(function ($room) {
+                $room->amenities->each(fn($amenity) => $amenity->makeHidden('pivot'));
+                return $room;
+            });
+
             return response()->json($rooms);
         } catch (Throwable $e) {
             return response()->json(['message' => 'Failed to fetch rooms', 'error' => $e->getMessage()], 500);
