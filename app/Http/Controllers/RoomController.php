@@ -11,10 +11,11 @@ use Throwable;
 
 class RoomController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
         try {
-            $rooms = Room::with(['thumbnails', 'amenities'])->paginate(5);
+            $pagenation = $request->input('pagination') || 5;
+            $rooms = Room::with(['thumbnails', 'amenities'])->paginate($pagenation);
 
             $rooms->getCollection()->transform(function ($room) {
                 $room->amenities->each(fn($amenity) => $amenity->makeHidden('details'));

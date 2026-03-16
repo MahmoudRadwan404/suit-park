@@ -12,10 +12,12 @@ use Throwable;
 
 class ImageController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
         try {
-            $images = Image::paginate(10);
+            $pagenation = $request->input('pagination') || 5;
+
+            $images = Image::paginate($pagenation);
             return response()->json($images);
         } catch (Throwable $e) {
             return response()->json(['message' => 'Failed to fetch images', 'error' => $e->getMessage()], 500);

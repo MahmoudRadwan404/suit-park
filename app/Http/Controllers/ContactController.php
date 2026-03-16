@@ -11,10 +11,12 @@ use Throwable;
 
 class ContactController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
         try {
-            $contacts = Contact::paginate(10);
+            $pagenation = $request->input('pagination') || 5;
+
+            $contacts = Contact::paginate($pagenation);
             return response()->json($contacts);
         } catch (Throwable $e) {
             return response()->json(['message' => 'Failed to fetch contacts', 'error' => $e->getMessage()], 500);
