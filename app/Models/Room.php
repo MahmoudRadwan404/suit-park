@@ -37,6 +37,10 @@ class Room extends Model
     {
         return $this->hasMany(Image::class);
     }
+    public function thumbnails(): HasMany
+    {
+        return $this->hasMany(Image::class)->where('type', 'thumbnail');
+    }
 
     public function amenities(): BelongsToMany
     {
