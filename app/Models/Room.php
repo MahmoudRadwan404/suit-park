@@ -32,6 +32,7 @@ class Room extends Model
         'price' => 'integer',
         'area' => 'decimal:2',
     ];
+
     public function images(): HasMany
     {
         return $this->hasMany(Image::class);
@@ -39,6 +40,9 @@ class Room extends Model
 
     public function amenities(): BelongsToMany
     {
-        return $this->belongsToMany(Amenity::class, 'room_amenities');
+        return $this->belongsToMany(Amenity::class, 'room_amenities')
+            ->withPivot('number', 'value')
+            ->withTimestamps()
+            ->as('details');
     }
 }
