@@ -117,11 +117,20 @@ class RoomController extends Controller
             $room = Room::findOrFail($id);
 
             $validated = $request->validate([
-                'amenity_ids' => 'required|array',
-                'amenity_ids.*' => 'exists:amenities,id',
+                'amenities' => 'required|array',
+                'amenities.*.id' => 'required|exists:amenities,id',
+                'amenities.*.number' => 'nullable|integer',
+                'amenities.*.value' => 'nullable|string',
             ]);
 
-            $room->amenities()->attach($validated['amenity_ids']);
+            $syncData = collect($validated['amenities'])->mapWithKeys(fn($amenity) => [
+                $amenity['id'] => [
+                    'number' => $amenity['number'] ?? null,
+                    'value' => $amenity['value'] ?? null,
+                ]
+            ]);
+
+            $room->amenities()->attach($syncData);
 
             return response()->json([
                 'message' => 'Amenities attached successfully',

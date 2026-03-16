@@ -11,6 +11,8 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('room_id')->constrained('rooms')->cascadeOnDelete();
             $table->foreignId('amenity_id')->constrained('amenities')->cascadeOnDelete();
+            $table->integer('number')->nullable();
+            $table->string('value')->nullable();
             $table->unique(['room_id', 'amenity_id']);
             $table->timestamps();
         });
