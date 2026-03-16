@@ -14,7 +14,7 @@ class RoomController extends Controller
     public function index(): JsonResponse
     {
         try {
-            $rooms = Room::with(['images', 'amenities'])->paginate(5);
+            $rooms = Room::with(['images', 'amenitiesWithoutPivot'])->paginate(5);
 
             $rooms->getCollection()->transform(function ($room) {
                 $room->amenities->each(fn($amenity) => $amenity->makeHidden('details'));

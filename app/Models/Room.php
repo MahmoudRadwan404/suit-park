@@ -45,4 +45,8 @@ class Room extends Model
             ->withTimestamps()
             ->as('details');
     }
+    public function amenitiesWithoutPivot(): BelongsToMany
+    {
+        return $this->belongsToMany(Amenity::class, 'room_amenities');
+    }
 }
