@@ -29,21 +29,24 @@ class ImageController extends Controller
         try {
             $request->validate([
                 'room_id' => 'nullable|exists:rooms,id',
-                'type' => 'required|string|max:20',
                 'images' => 'required|array',
-                'images.*' => 'required|image|mimes:jpg,jpeg,png,webp|max:5048',
+                'images.*.file' => 'required|image|mimes:jpg,jpeg,png,webp|max:5048',
+                'images.*.type' => 'required|string|max:20',
             ]);
 
             $uploaded = [];
 
-            foreach ($request->file('images') as $file) {
+            foreach ($request->file('images') as $index => $image) {
+                $file = $image['file'];
+                $type = $request->input("images.$index.type");
+
                 $name = $file->getClientOriginalName();
                 $path = $file->store('images', 'public');
 
                 $uploaded[] = Image::create([
                     'name' => $name,
                     'path' => asset('storage/' . $path),
-                    'type' => $request->type,
+                    'type' => $type,
                     'room_id' => $request->room_id,
                 ]);
             }
