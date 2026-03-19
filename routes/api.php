@@ -49,11 +49,11 @@ Route::prefix('images')->group(function () {
 
 // Contacts
 Route::prefix('contacts')->group(function () {
-    Route::get('/', [ContactController::class, 'index']);
-    Route::get('/{id}', [ContactController::class, 'show']);
+    Route::post('/', [ContactController::class, 'store']);
 
     Route::middleware('auth:api')->group(function () {
-        Route::post('/', [ContactController::class, 'store']);
+        Route::get('/', [ContactController::class, 'index']);
+        Route::get('/{id}', [ContactController::class, 'show']);
         Route::delete('/{id}', [ContactController::class, 'destroy']);
     });
 });
