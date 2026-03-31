@@ -19,7 +19,8 @@ return new class extends Migration {
             $table->string('location_en', 200);
             $table->text('description_ar');
             $table->text('description_en');
-            $table->integer('price');
+            $table->integer('min_price');//add min and max price
+            $table->integer('max_price');//add min and max price
             $table->integer('type_id');
             $table->string('type_name_ar');
             $table->string('type_name_en');
