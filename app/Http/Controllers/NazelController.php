@@ -100,7 +100,7 @@ class NazelController extends Controller
 
     public function filter(Request $request)
     {
-        $results = NazelName::with(['rooms', 'rooms.thumbnails', 'rooms.amenities'])
+        $results = NazelName::with(['rooms', 'rooms.images', 'rooms.amenities'])
             ->when($request->name_ar, fn($q) => $q->where('name_ar', $request->name_ar))
             ->when($request->name_en, fn($q) => $q->orWhere('name_en', $request->name_en))
             ->get();
