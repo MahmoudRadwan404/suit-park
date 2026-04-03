@@ -49,6 +49,7 @@ class RoomController extends Controller
                 'area' => 'required|numeric|min:0',
                 'look_ar' => 'required|string|max:100',
                 'look_en' => 'required|string|max:100',
+                'nazel_name_id' => 'required|integer|exists:nazel_names,id'
             ]);
 
             $room = Room::create($validated);
@@ -94,6 +95,7 @@ class RoomController extends Controller
                 'area' => 'sometimes|numeric|min:0',
                 'look_ar' => 'sometimes|string|max:100',
                 'look_en' => 'sometimes|string|max:100',
+                'nazel_name_id' => 'sometimes|integer|exists:nazel_names,id'
             ]);
             $room = Room::findOrFail($id);
 

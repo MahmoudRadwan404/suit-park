@@ -26,6 +26,8 @@ class Room extends Model
         'area',
         'look_ar',
         'look_en',
+        'nazel_name_id',
+
     ];
 
     protected $casts = [
@@ -49,6 +51,10 @@ class Room extends Model
             ->withPivot('number', 'value')
             ->withTimestamps()
             ->as('details');
+    }
+    public function nazelName()
+    {
+        return $this->belongsTo(NazelName::class);
     }
 
 }

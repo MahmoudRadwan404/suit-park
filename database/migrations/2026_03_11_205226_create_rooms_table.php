@@ -29,6 +29,7 @@ return new class extends Migration {
             $table->decimal('area', 8, 2);
             $table->string('look_ar', 100);
             $table->string('look_en', 100);
+            $table->foreignId('nazel_name_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

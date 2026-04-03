@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\NazelController;
 use App\Models\Room;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ImageController;
@@ -67,6 +68,17 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/{id}', [UserController::class, 'deleteUser']);
     Route::post('/update/{id}', [UserController::class, 'updateUser']);
 });
+
+Route::get('/nazels', [NazelController::class, 'index']);
+Route::get('/nazels/filter', [NazelController::class, 'filter']);  // filter route
+Route::get('/nazels/{id}', [NazelController::class, 'show']);
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('/nazels', [NazelController::class, 'store']);
+    Route::post('/nazels/{id}', [NazelController::class, 'update']);
+    Route::delete('/nazels/{id}', [NazelController::class, 'destroy']);
+});
+
 
 Route::get('/api/health', function () {
     $room = Room::paginate(1);
