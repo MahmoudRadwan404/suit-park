@@ -68,7 +68,7 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/{id}', [UserController::class, 'deleteUser']);
     Route::post('/update/{id}', [UserController::class, 'updateUser']);
     Route::get('/me', [UserController::class, 'me']);
-    Route::get('/all', [UserController::class, 'all']);
+    Route::get('/users', [UserController::class, 'all']);
 });
 
 Route::get('/nazels', [NazelController::class, 'index']);
