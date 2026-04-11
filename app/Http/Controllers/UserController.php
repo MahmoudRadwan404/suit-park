@@ -96,6 +96,20 @@ class UserController extends Controller
             return response()->json(['error' => 'Something went wrong'], 500);
         }
     }
+    public function all()
+    {
+        try {
+            $user = auth()->user();
+
+            if (!$user) {
+                return response()->json(['error' => 'User not found'], 404);
+            }
+            $users = User::all();
+            return response()->json($users);
+        } catch (Exception $e) {
+            return response($e->getMessage());
+        }
+    }
 
     public function register(Request $request)
     {
