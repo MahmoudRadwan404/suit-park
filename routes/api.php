@@ -47,7 +47,7 @@ Route::prefix('amenities')->group(function () {
 Route::prefix('images')->group(function () {
     Route::get('/', [ImageController::class, 'index']);
     Route::get('/{id}', [ImageController::class, 'show']);
-    Route::get('/{type}', [ImageController::class, 'getImageByType']);
+    Route::get('/type/{type}', [ImageController::class, 'getImageByType']);
 
     Route::middleware('auth:api')->group(function () {
         Route::post('/', [ImageController::class, 'store']);
