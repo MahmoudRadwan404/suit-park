@@ -13,8 +13,10 @@ use App\Http\Controllers\PolicyController;
 
 
 Route::get('/policy', [PolicyController::class, 'index']);
-Route::post('/policy', [PolicyController::class, 'store']);
-Route::delete('/policy', [PolicyController::class, 'destroy']);
+Route::middleware('auth:api')->group(function () {
+    Route::post('/policy', [PolicyController::class, 'store']);
+    Route::delete('/policy', [PolicyController::class, 'destroy']);
+});
 // Rooms
 Route::prefix('rooms')->group(function () {
     Route::get('/', [RoomController::class, 'index']);
@@ -46,8 +48,8 @@ Route::prefix('amenities')->group(function () {
 // Images
 Route::prefix('images')->group(function () {
     Route::get('/', [ImageController::class, 'index']);
-    Route::get('/{id}', [ImageController::class, 'show']);
     Route::get('/type/{type}', [ImageController::class, 'getImageByType']);
+    Route::get('/{id}', [ImageController::class, 'show']);
 
     Route::middleware('auth:api')->group(function () {
         Route::post('/', [ImageController::class, 'store']);
