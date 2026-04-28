@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -74,7 +75,15 @@ class ImageController extends Controller
             return response()->json(['message' => 'Failed to fetch image', 'error' => $e->getMessage()], 500);
         }
     }
-
+    public function getImageByType($type)
+    {
+        try {
+            $images = Image::where('type', $type)->get();
+            return response()->json($images);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'Image not found'], 404);
+        }
+    }
     public function update(Request $request, int $id): JsonResponse
     {
         try {

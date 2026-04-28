@@ -7,7 +7,14 @@ use App\Http\Controllers\AmenityController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PolicyController;
 
+
+
+
+Route::get('/policy', [PolicyController::class, 'index']);
+Route::post('/policy', [PolicyController::class, 'store']);
+Route::delete('/policy', [PolicyController::class, 'destroy']);
 // Rooms
 Route::prefix('rooms')->group(function () {
     Route::get('/', [RoomController::class, 'index']);
@@ -40,6 +47,7 @@ Route::prefix('amenities')->group(function () {
 Route::prefix('images')->group(function () {
     Route::get('/', [ImageController::class, 'index']);
     Route::get('/{id}', [ImageController::class, 'show']);
+    Route::get('/{type}', [ImageController::class, 'getImageByType']);
 
     Route::middleware('auth:api')->group(function () {
         Route::post('/', [ImageController::class, 'store']);
@@ -71,6 +79,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/users', [UserController::class, 'all']);
 });
 
+
 Route::get('/nazels', [NazelController::class, 'index']);
 Route::get('/nazels/filter', [NazelController::class, 'filter']);  // filter route
 Route::get('/nazels/{id}', [NazelController::class, 'show']);
@@ -80,6 +89,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/nazels/{id}', [NazelController::class, 'update']);
     Route::delete('/nazels/{id}', [NazelController::class, 'destroy']);
 });
+
+//---------------policies-----------------------------
 
 
 Route::get('/api/health', function () {
